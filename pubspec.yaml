@@ -7,40 +7,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.13.3
   cupertino_icons: ^1.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
 flutter:
   uses-material-design: true
-
-  
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
