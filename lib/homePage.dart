@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'colorsDefault.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -9,6 +13,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String artistName = '';
+  String musicName = '';
+  String youTubeSearch;
+  String lyricMusic = '';
+  bool findMusic = false;
+
+  void _launchURL() async {
+    youTubeSearch =
+        'https://www.youtube.com/results?search_query=$artistName+$musicName';
+    await canLaunch(youTubeSearch)
+        ? await launch(youTubeSearch)
+        : throw 'Could not launch $youTubeSearch';
+  }
+
+  void _getMusicAPI() async {
+    final url = Uri.parse(
+        'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=jsonp&callback=callback&q_track=$musicName&q_artist=$artistName&apikey=54adac49846aa5130d5ec9c73383d48a');
+    final response = await http.get(url);
+    print(response.body);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +91,9 @@ class _HomePageState extends State<HomePage> {
                     child: ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 300),
                   child: TextField(
+                    onChanged: (value) => {
+                      artistName = value.toString(),
+                    },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Nome do Artista',
@@ -77,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 300),
                     child: TextField(
+                      onChanged: (value) => {musicName = value},
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Nome da Música',
@@ -94,7 +123,17 @@ class _HomePageState extends State<HomePage> {
                             EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
-                    onPressed: () {},
+                    onPressed: () async {
+                      print(artistName);
+                      print(musicName);
+                      await _getMusicAPI();
+                      setState(() {
+                        artistName = artistName;
+                        musicName = musicName;
+                        lyricMusic = lyricMusic;
+                        findMusic = true;
+                      });
+                    },
                     child: Text('Buscar Letra'),
                   ),
                 ),
@@ -108,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                             EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
-                    onPressed: () {},
+                    onPressed: _launchURL,
                     child: Text('Buscar no YouTube'),
                   ),
                 ),
@@ -123,20 +162,20 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         Text(
-                          'Nome da Música',
+                          '$musicName',
                           style: TextStyle(
                               color: DefaultColors.whiteColor, fontSize: 20),
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Nome do Cantor ou Banda',
+                          '$artistName',
                           style: TextStyle(
                               color: DefaultColors.whiteColor, fontSize: 15),
                         ),
                         SizedBox(height: 10),
                         Container(
                           child: Text(
-                            'dddddddddddddddd\nqaqqqqqqqqqqqqqqqqqqqqqqqq\nsssssssssssssssssssssss\nddddddddddddddddddddddd\neeeeeeeeeeeeeeeeeeeeee\ndddddddddddddddddddd\nddddddddddddddddddddd\ndddddddddddddddddddddda\neeeeeeeeeeeeeeeeeeeeeeeeeeeee\nssssssssssssssssssssssssss\nsssssssssssssssssssssss\nsssssssssssssssssss\ndddddddddddddddd\nqaqqqqqqqqqqqqqqqqqqqqqqqq\nsssssssssssssssssssssss\nddddddddddddddddddddddd\neeeeeeeeeeeeeeeeeeeeee\ndddddddddddddddddddd\nddddddddddddddddddddd\ndddddddddddddddddddddda\neeeeeeeeeeeeeeeeeeeeeeeeeeeee\nssssssssssssssssssssssssss\nsssssssssssssssssssssss\nsssssssssssssssssss\ndddddddddddddddd\nqaqqqqqqqqqqqqqqqqqqqqqqqq\nsssssssssssssssssssssss\nddddddddddddddddddddddd\neeeeeeeeeeeeeeeeeeeeee\ndddddddddddddddddddd\nddddddddddddddddddddd\ndddddddddddddddddddddda\neeeeeeeeeeeeeeeeeeeeeeeeeeeee\nssssssssssssssssssssssssss\nsssssssssssssssssssssss\nsssssssssssssssssss',
+                            '$lyricMusic',
                             style: TextStyle(
                               color: DefaultColors.whiteColor,
                             ),
