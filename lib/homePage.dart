@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'colorsDefault.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 import 'dart:convert';
 
 class HomePage extends StatefulWidget {
@@ -28,10 +27,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getMusicAPI() async {
-    final url = Uri.parse(
-        'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=jsonp&callback=callback&q_track=$musicName&q_artist=$artistName&apikey=54adac49846aa5130d5ec9c73383d48a');
-    final response = await http.get(url);
-    print(response.body);
+    musicName = 'frank sinatra';
+    artistName = 'new york';
+    print('------------------');
+    try {
+      final uri = Uri.parse(
+          'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=jsonp&callback=callback&q_track=new%20york&q_artist=frank%20sinatra&apikey=54adac49846aa5130d5ec9c73383d48a');
+      final response = await http.get(uri);
+      final res = response.body;
+      print(res);
+    } catch (error) {
+      throw Exception(error);
+    }
   }
 
   @override
