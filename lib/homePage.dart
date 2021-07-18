@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'colorsDefault.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -16,7 +16,8 @@ class _HomePageState extends State<HomePage> {
   String musicName = '';
   String youTubeSearch;
   String lyricMusic = '';
-  bool findMusic = false;
+  bool findingMusic = false;
+  bool initialState = true;
 
   void _launchURL() async {
     youTubeSearch =
@@ -27,11 +28,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getMusicAPI() async {
-    musicName = 'frank sinatra';
-    artistName = 'new york';
     try {
       final uri = Uri.parse(
-          'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=jsonp&callback=callback&q_track=new%20york&q_artist=frank%20sinatra&apikey=54adac49846aa5130d5ec9c73383d48a');
+          'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=jsonp&callback=callback&q_track=$musicName&q_artist=$artistName&apikey=54adac49846aa5130d5ec9c73383d48a');
       final response = await http.get(uri);
       final regExp1 = RegExp(r'"lyrics_body":\".*?"');
       final regExp2 = RegExp(r'(?<=\").+?(?=\")');
@@ -45,6 +44,66 @@ class _HomePageState extends State<HomePage> {
       });
     } catch (error) {
       throw Exception(error);
+    }
+  }
+
+  dynamic loading() {
+    return Container(
+      child: SpinKitFadingCircle(
+        itemBuilder: (BuildContext context, int index) {
+          return DecoratedBox(
+            decoration: BoxDecoration(
+              color: index.isEven ? Colors.red : Colors.green,
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget lyrics() {
+    return Container(
+      width: 300,
+      decoration: BoxDecoration(
+        color: DefaultColors.secondaryVioletColor,
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Text(
+              '$musicName',
+              style: TextStyle(color: DefaultColors.whiteColor, fontSize: 20),
+            ),
+            SizedBox(height: 10),
+            Text(
+              '$artistName',
+              style: TextStyle(color: DefaultColors.whiteColor, fontSize: 15),
+            ),
+            SizedBox(height: 10),
+            Container(
+              child: Text(
+                '$lyricMusic',
+                style: TextStyle(
+                  color: DefaultColors.whiteColor,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget musicComponent() {
+    if (initialState) {
+      return Container();
+    } else {
+      if (findingMusic) {
+        return loading();
+      } else {
+        return lyrics();
+      }
     }
   }
 
@@ -140,7 +199,16 @@ class _HomePageState extends State<HomePage> {
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
                     onPressed: () async {
+                      setState(() {
+                        initialState = false;
+                        findingMusic = true;
+                      });
                       _getMusicAPI();
+                      Future.delayed(const Duration(seconds: 1), () {
+                        setState(() {
+                          findingMusic = false;
+                        });
+                      });
                       setState(() {
                         artistName = artistName;
                         musicName = musicName;
@@ -165,39 +233,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(height: 30),
-                Container(
-                  width: 300,
-                  decoration: BoxDecoration(
-                    color: DefaultColors.secondaryVioletColor,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Text(
-                          '$musicName',
-                          style: TextStyle(
-                              color: DefaultColors.whiteColor, fontSize: 20),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          '$artistName',
-                          style: TextStyle(
-                              color: DefaultColors.whiteColor, fontSize: 15),
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          child: Text(
-                            '$lyricMusic',
-                            style: TextStyle(
-                              color: DefaultColors.whiteColor,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                musicComponent(),
                 SizedBox(height: 30),
                 Container(
                   width: 300,
