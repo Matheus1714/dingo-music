@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'colorsDefault.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,6 +19,8 @@ class _HomePageState extends State<HomePage> {
   String lyricMusic = '';
   bool findingMusic = false;
   bool initialState = true;
+  List<String> sugestMusicName = [];
+  List<String> sugestArtistName = [];
 
   void _launchURL() async {
     youTubeSearch =
@@ -28,19 +31,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getMusicAPI() async {
+    musicName = "new york";
+    artistName = "frank sinatra";
     try {
       final uri = Uri.parse(
           'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=jsonp&callback=callback&q_track=$musicName&q_artist=$artistName&apikey=54adac49846aa5130d5ec9c73383d48a');
       final response = await http.get(uri);
-      final regExp1 = RegExp(r'"lyrics_body":\".*?"');
-      final regExp2 = RegExp(r'(?<=\").+?(?=\")');
-      final matches =
-          regExp1.allMatches(response.body).map((e) => e.group(0)).toList();
-      final myList = matches[0].split(":");
-      final myString =
-          regExp2.allMatches(myList[1]).map((e) => e.group(0)).toList()[0];
+
+      final regExp = RegExp(r'(?<=\().+?(?=\);)');
+
+      final jsonStr =
+          regExp.allMatches(response.body).map((e) => e.group(0)).toList()[0];
+      final res = jsonDecode(jsonStr);
       setState(() {
-        lyricMusic = myString.replaceAll("\\n", "\n");
+        lyricMusic = res["message"]["body"]["lyrics"]["lyrics_body"];
       });
     } catch (error) {
       throw Exception(error);
