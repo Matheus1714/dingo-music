@@ -29,13 +29,20 @@ class _HomePageState extends State<HomePage> {
   void _getMusicAPI() async {
     musicName = 'frank sinatra';
     artistName = 'new york';
-    print('------------------');
     try {
       final uri = Uri.parse(
           'https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=jsonp&callback=callback&q_track=new%20york&q_artist=frank%20sinatra&apikey=54adac49846aa5130d5ec9c73383d48a');
       final response = await http.get(uri);
-      final res = response.body;
-      print(res);
+      final regExp1 = RegExp(r'"lyrics_body":\".*?"');
+      final regExp2 = RegExp(r'(?<=\").+?(?=\")');
+      final matches =
+          regExp1.allMatches(response.body).map((e) => e.group(0)).toList();
+      final myList = matches[0].split(":");
+      final myString =
+          regExp2.allMatches(myList[1]).map((e) => e.group(0)).toList()[0];
+      setState(() {
+        lyricMusic = myString.replaceAll("\\n", "\n");
+      });
     } catch (error) {
       throw Exception(error);
     }
@@ -112,7 +119,9 @@ class _HomePageState extends State<HomePage> {
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 300),
                     child: TextField(
-                      onChanged: (value) => {musicName = value},
+                      onChanged: (value) {
+                        musicName = value.toString();
+                      },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Nome da Música',
@@ -131,14 +140,11 @@ class _HomePageState extends State<HomePage> {
                         textStyle: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
                     onPressed: () async {
-                      print(artistName);
-                      print(musicName);
-                      await _getMusicAPI();
+                      _getMusicAPI();
                       setState(() {
                         artistName = artistName;
                         musicName = musicName;
                         lyricMusic = lyricMusic;
-                        findMusic = true;
                       });
                     },
                     child: Text('Buscar Letra'),
@@ -165,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                     color: DefaultColors.secondaryVioletColor,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    padding: EdgeInsets.all(10),
                     child: Column(
                       children: [
                         Text(
