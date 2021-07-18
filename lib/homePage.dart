@@ -19,8 +19,35 @@ class _HomePageState extends State<HomePage> {
   String lyricMusic = '';
   bool findingMusic = false;
   bool initialState = true;
-  List<String> sugestMusicName = [];
-  List<String> sugestArtistName = [];
+  List<String> sugestMusicName = null;
+  List<String> sugestArtistName = null;
+
+  void sugest() async {
+    musicName = "the";
+    final uri = Uri.parse(
+        'https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_track=$musicName&q_artist=$artistName&quorum_factor=1&apikey=54adac49846aa5130d5ec9c73383d48a');
+
+    final response = await http.get(uri);
+    final regExp = RegExp(r'(?<=\().+?(?=\);)');
+
+    final jsonStr =
+        regExp.allMatches(response.body).map((e) => e.group(0)).toList()[0];
+    final res = jsonDecode(jsonStr);
+
+    final trackList = res["message"]["body"]["track_list"];
+    final listTrack =
+        trackList.map((trk) => trk["track"]["track_name"].toString());
+    final listArtist =
+        trackList.map((trk) => trk["track"]["artist_name"].toString());
+
+    print(listArtist);
+
+    // musicName = listTrack;
+    // artistName = listArtist;
+
+    // print(musicName);
+    // print(artistName);
+  }
 
   void _launchURL() async {
     youTubeSearch =
@@ -113,6 +140,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    sugest();
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
