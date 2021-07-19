@@ -4,8 +4,7 @@ import 'colorsDefault.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:autocomplete_textfield/autocomplete_textfield.dart';
-import 'models/track.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -15,28 +14,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  GlobalKey<AutoCompleteTextFieldState<Tracks>> key = new GlobalKey();
-
-  AutoCompleteTextField searchTextField;
-
-  TextEditingController controller = new TextEditingController();
-
+  final TextEditingController _typeAheadControllerArtist = TextEditingController();
+  final TextEditingController _typeAheadControllerMusic = TextEditingController();
   String artistName = '';
   String musicName = '';
   String youTubeSearch;
   String lyricMusic = '';
   bool findingMusic = false;
   bool initialState = true;
-
-  void _loadData() async {
-    await TracksViewModel.loadTracks();
-  }
-
-  @override
-  void initState() {
-    _loadData();
-    super.initState();
-  }
 
   // void sugest() async {
   //   final uri = Uri.parse(
@@ -53,10 +38,6 @@ class _HomePageState extends State<HomePage> {
   //       trackList.map((trk) => trk["track"]["track_name"].toString()).toList();
   //   final listArtist =
   //       trackList.map((trk) => trk["track"]["artist_name"].toString()).toList();
-  //   setState(() {
-  //     sugestMusicName = listTrack;
-  //     sugestArtistName = listArtist;
-  //   });
   // }
 
   void _launchURL() async {
@@ -207,71 +188,64 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 300),
-                    child: Column(
-                      children: [
-                        searchTextField = AutoCompleteTextField<Tracks>(
-                            style: new TextStyle(
-                                color: Colors.black, fontSize: 16.0),
-                            decoration: new InputDecoration(
-                                suffixIcon: Container(
-                                  width: 85.0,
-                                  height: 60.0,
-                                ),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 20.0),
-                                filled: true,
-                                hintText: 'Search Artist Name',
-                                hintStyle: TextStyle(color: Colors.black)),
-                            itemSubmitted: (item) {
-                              setState(() => searchTextField
-                                  .textField.controller.text = item.artistName);
-                            },
-                            clearOnSubmit: false,
-                            key: key,
-                            suggestions: TracksViewModel.tracks,
-                            itemBuilder: (context, item) {
-                              return Text(
-                                item.artistName,
-                                style: TextStyle(fontSize: 16.0),
-                              );
-                            },
-                            itemSorter: (a, b) {
-                              return a.artistName.compareTo(b.artistName);
-                            },
-                            itemFilter: (item, query) {
-                              return item.artistName
-                                  .toLowerCase()
-                                  .startsWith(query.toLowerCase());
-                            })
-                      ],
+                    child: TypeAheadField(
+                      textFieldConfiguration: TextFieldConfiguration(
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Nome do Artista',
+                        ),
+                        controller: this._typeAheadControllerArtist
+                      ),
+                      suggestionsCallback: (pattern) async {
+                        // Chamada http
+                        return await BackendService.getSuggestions(musicName, pattern);
+                      },
+                      itemBuilder: (context, suggestion) {
+                        return ListTile(
+                          title: Text(suggestion["track"]["artist_name"]),
+                        );
+                      },
+                      onSuggestionSelected: (suggestion) {
+                        // Quando alguem clica em um item
+                        setState(() {
+                          artistName = suggestion["track"]["artist_name"].toString();
+                        });
+                        this._typeAheadControllerArtist.text = suggestion["track"]["artist_name"];
+                      },
                     ),
                   ),
                 ),
-                Container(
-                    child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 300),
-                  child: TextField(
-                    onChanged: (value) => {
-                      artistName = value.toString(),
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Nome do Artista',
-                    ),
-                  ),
-                )),
                 SizedBox(height: 30),
                 Container(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 300),
-                    child: TextField(
-                      onChanged: (value) {
-                        musicName = value.toString();
-                      },
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Nome da Música',
+                    child: TypeAheadField(
+                      textFieldConfiguration: TextFieldConfiguration(
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Nome da Música',
+                        ),
+                        controller: this._typeAheadControllerMusic
                       ),
+                      suggestionsCallback: (pattern) async {
+                        // Chamada http
+                        return await BackendService.getSuggestions(pattern, artistName);
+                      },
+                      itemBuilder: (context, suggestion) {
+                        return ListTile(
+                          title: Text(suggestion["track"]["track_name"]),
+                        );
+                      },
+                      onSuggestionSelected: (suggestion) {
+                        // Quando alguem clica em um item
+                        setState(() {
+                          musicName = suggestion["track"]["track_name"].toString();
+                        });
+                        this._typeAheadControllerMusic.text = suggestion["track"]["track_name"];
+                      },
+                      
                     ),
                   ),
                 ),
@@ -341,5 +315,28 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+class BackendService {
+  static getSuggestions(String musicName, String artistName) async {
+    if (artistName != "") {
+      final uri = Uri.parse(
+          'https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&&q_track=$musicName&q_artist=$artistName&quorum_factor=1&apikey=54adac49846aa5130d5ec9c73383d48a');
+
+      final response = await http.get(uri);
+      final regExp = RegExp(r'\{.*\}');
+      final jsonStr =
+          regExp.allMatches(response.body).map((e) => e.group(0)).toList()[0];
+      final res = jsonDecode(jsonStr);
+
+      final trackList = res["message"]["body"]["track_list"];
+      final listArtist = trackList
+          .map((trk) => trk["track"]["artist_name"].toString())
+          .toList();
+      return trackList;
+    } else {
+      return {};
+    }
   }
 }
