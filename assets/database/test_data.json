@@ -1,0 +1,325 @@
+{
+    "message": {
+        "header": {
+            "status_code": 200,
+            "execute_time": 0.21960806846619,
+            "available": 10000
+        },
+        "body": {
+            "track_list": [
+                {
+                    "track": {
+                        "track_id": 1781881,
+                        "track_name": "(Moneymaker)",
+                        "track_name_translation_list": [],
+                        "track_rating": 1,
+                        "commontrack_id": 6998256,
+                        "instrumental": 0,
+                        "explicit": 0,
+                        "has_lyrics": 1,
+                        "has_subtitles": 0,
+                        "has_richsync": 0,
+                        "num_favourite": 0,
+                        "album_id": 10364999,
+                        "album_name": "Like a Moth Before a Flame",
+                        "artist_id": 90303,
+                        "artist_name": "The Snake the Cross the Crown",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Snake-the-Cross-the-Crown\/Moneymaker?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Snake-the-Cross-the-Crown\/Moneymaker\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2011-12-16T12:09:44Z",
+                        "primary_genres": {
+                            "music_genre_list": [
+                                {
+                                    "music_genre": {
+                                        "music_genre_id": 20,
+                                        "music_genre_parent_id": 34,
+                                        "music_genre_name": "Alternative",
+                                        "music_genre_name_extended": "Alternative",
+                                        "music_genre_vanity": "Alternative"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "track": {
+                        "track_id": 34958475,
+                        "track_name": "Interlude 2 (Live)",
+                        "track_name_translation_list": [],
+                        "track_rating": 25,
+                        "commontrack_id": 14333416,
+                        "instrumental": 1,
+                        "explicit": 0,
+                        "has_lyrics": 0,
+                        "has_subtitles": 0,
+                        "has_richsync": 0,
+                        "num_favourite": 1,
+                        "album_id": 15571532,
+                        "album_name": "Live At the Electric Factory - Bootleg No. 1",
+                        "artist_id": 148806,
+                        "artist_name": "The Fray",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Fray\/Interlude-2-Live?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Fray\/Interlude-2-Live\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2016-01-26T00:41:52Z",
+                        "primary_genres": {
+                            "music_genre_list": [
+                                {
+                                    "music_genre": {
+                                        "music_genre_id": 21,
+                                        "music_genre_parent_id": 34,
+                                        "music_genre_name": "Rock",
+                                        "music_genre_name_extended": "Rock",
+                                        "music_genre_vanity": "Rock"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "track": {
+                        "track_id": 61118014,
+                        "track_name": "Livin' In Hysteria",
+                        "track_name_translation_list": [],
+                        "track_rating": 1,
+                        "commontrack_id": 31123142,
+                        "instrumental": 0,
+                        "explicit": 1,
+                        "has_lyrics": 1,
+                        "has_subtitles": 1,
+                        "has_richsync": 0,
+                        "num_favourite": 0,
+                        "album_id": 17967607,
+                        "album_name": "Livin' In Hysteria",
+                        "artist_id": 26935849,
+                        "artist_name": "The Neverdies",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Neverdies\/Livin-In-Hysteria?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Neverdies\/Livin-In-Hysteria\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2017-01-14T13:33:18Z",
+                        "primary_genres": {
+                            "music_genre_list": [
+                                {
+                                    "music_genre": {
+                                        "music_genre_id": 21,
+                                        "music_genre_parent_id": 34,
+                                        "music_genre_name": "Rock",
+                                        "music_genre_name_extended": "Rock",
+                                        "music_genre_vanity": "Rock"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "track": {
+                        "track_id": 35415179,
+                        "track_name": "One Bad Apple Don't Spoil the Whole Bunch \/ Double Lovin' (Live)",
+                        "track_name_translation_list": [],
+                        "track_rating": 1,
+                        "commontrack_id": 14647919,
+                        "instrumental": 0,
+                        "explicit": 0,
+                        "has_lyrics": 1,
+                        "has_subtitles": 0,
+                        "has_richsync": 0,
+                        "num_favourite": 0,
+                        "album_id": 15603820,
+                        "album_name": "Live In Las Vegas - 50th Anniversary Reunion Concert",
+                        "artist_id": 56822,
+                        "artist_name": "The Osmonds",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Osmonds\/One-Bad-Apple-Don-t-Spoil-the-Whole-Bunch-Double-Lovin-Live?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Osmonds\/One-Bad-Apple-Don-t-Spoil-the-Whole-Bunch-Double-Lovin-Live\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2018-02-13T10:13:17Z",
+                        "primary_genres": {
+                            "music_genre_list": [
+                                {
+                                    "music_genre": {
+                                        "music_genre_id": 14,
+                                        "music_genre_parent_id": 34,
+                                        "music_genre_name": "Pop",
+                                        "music_genre_name_extended": "Pop",
+                                        "music_genre_vanity": "Pop"
+                                    }
+                                },
+                                {
+                                    "music_genre": {
+                                        "music_genre_id": 11,
+                                        "music_genre_parent_id": 34,
+                                        "music_genre_name": "Jazz",
+                                        "music_genre_name_extended": "Jazz",
+                                        "music_genre_vanity": "Jazz"
+                                    }
+                                },
+                                {
+                                    "music_genre": {
+                                        "music_genre_id": 1133,
+                                        "music_genre_parent_id": 14,
+                                        "music_genre_name": "Pop\/Rock",
+                                        "music_genre_name_extended": "Pop \/ Pop\/Rock",
+                                        "music_genre_vanity": "Pop-Pop-Rock"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "track": {
+                        "track_id": 5131012,
+                        "track_name": "The Return of the Berserker",
+                        "track_name_translation_list": [],
+                        "track_rating": 1,
+                        "commontrack_id": 2823532,
+                        "instrumental": 0,
+                        "explicit": 0,
+                        "has_lyrics": 1,
+                        "has_subtitles": 0,
+                        "has_richsync": 0,
+                        "num_favourite": 0,
+                        "album_id": 10646400,
+                        "album_name": "News and Tributes",
+                        "artist_id": 44944,
+                        "artist_name": "The Futureheads",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Futureheads\/The-Return-of-the-Berserker?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Futureheads\/The-Return-of-the-Berserker\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2011-06-12T11:35:11Z",
+                        "primary_genres": {
+                            "music_genre_list": []
+                        }
+                    }
+                },
+                {
+                    "track": {
+                        "track_id": 35671183,
+                        "track_name": "What Am I",
+                        "track_name_translation_list": [],
+                        "track_rating": 9,
+                        "commontrack_id": 14743187,
+                        "instrumental": 0,
+                        "explicit": 1,
+                        "has_lyrics": 1,
+                        "has_subtitles": 1,
+                        "has_richsync": 0,
+                        "num_favourite": 0,
+                        "album_id": 15620851,
+                        "album_name": "Beats for Brothels, Vol. 2",
+                        "artist_id": 12610226,
+                        "artist_name": "The Doppelgangaz",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Doppelgangaz\/What-Am-I?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Doppelgangaz\/What-Am-I\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2015-03-09T07:27:20Z",
+                        "primary_genres": {
+                            "music_genre_list": [
+                                {
+                                    "music_genre": {
+                                        "music_genre_id": 1073,
+                                        "music_genre_parent_id": 18,
+                                        "music_genre_name": "Hip-Hop",
+                                        "music_genre_name_extended": "Hip Hop\/Rap \/ Hip-Hop",
+                                        "music_genre_vanity": "Hip-Hop-Rap-Hip-Hop"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "track": {
+                        "track_id": 34715734,
+                        "track_name": "Last Thing You Said (Intro)",
+                        "track_name_translation_list": [],
+                        "track_rating": 1,
+                        "commontrack_id": 14159896,
+                        "instrumental": 1,
+                        "explicit": 0,
+                        "has_lyrics": 0,
+                        "has_subtitles": 0,
+                        "has_richsync": 0,
+                        "num_favourite": 1,
+                        "album_id": 15554984,
+                        "album_name": "Effra Parade",
+                        "artist_id": 24839456,
+                        "artist_name": "The Melodic",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Melodic\/Last-Thing-You-Said-Intro?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Melodic\/Last-Thing-You-Said-Intro\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2014-08-31T21:04:47Z",
+                        "primary_genres": {
+                            "music_genre_list": [
+                                {
+                                    "music_genre": {
+                                        "music_genre_id": 20,
+                                        "music_genre_parent_id": 34,
+                                        "music_genre_name": "Alternative",
+                                        "music_genre_name_extended": "Alternative",
+                                        "music_genre_vanity": "Alternative"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "track": {
+                        "track_id": 2103067,
+                        "track_name": "(What's So Funny 'bout) Peace, Love, and Understanding (acoustic)",
+                        "track_name_translation_list": [],
+                        "track_rating": 4,
+                        "commontrack_id": 216837,
+                        "instrumental": 0,
+                        "explicit": 0,
+                        "has_lyrics": 1,
+                        "has_subtitles": 0,
+                        "has_richsync": 0,
+                        "num_favourite": 0,
+                        "album_id": 10390876,
+                        "album_name": "Live at the Metro",
+                        "artist_id": 667,
+                        "artist_name": "The Ataris",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Ataris\/What-s-So-Funny-bout-Peace-Love-and-Understanding-acoustic?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Ataris\/What-s-So-Funny-bout-Peace-Love-and-Understanding-acoustic\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2015-11-13T20:51:01Z",
+                        "primary_genres": {
+                            "music_genre_list": []
+                        }
+                    }
+                },
+                {
+                    "track": {
+                        "track_id": 72128216,
+                        "track_name": "\u041d\u0430 \u0433\u0440\u0430\u043d\u0438 \u0441\u0442\u0440\u0430\u0445\u0430 \u0438 \u043f\u043e\u043a\u043e\u044f",
+                        "track_name_translation_list": [],
+                        "track_rating": 7,
+                        "commontrack_id": 39522014,
+                        "instrumental": 0,
+                        "explicit": 0,
+                        "has_lyrics": 1,
+                        "has_subtitles": 0,
+                        "has_richsync": 0,
+                        "num_favourite": 0,
+                        "album_id": 19531521,
+                        "album_name": "\u041e\u0442\u0432\u0435\u0440\u0436\u0435\u043d\u0438\u0435 \u0431\u0435\u0437\u0443\u043c\u0438\u044f",
+                        "artist_id": 27763481,
+                        "artist_name": "The Ward",
+                        "track_share_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Ward\/%D0%9D%D0%B0-%D0%B3%D1%80%D0%B0%D0%BD%D0%B8-%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0-%D0%B8-%D0%BF%D0%BE%D0%BA%D0%BE%D1%8F?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "track_edit_url": "https:\/\/www.musixmatch.com\/lyrics\/The-Ward\/%D0%9D%D0%B0-%D0%B3%D1%80%D0%B0%D0%BD%D0%B8-%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0-%D0%B8-%D0%BF%D0%BE%D0%BA%D0%BE%D1%8F\/edit?utm_source=application&utm_campaign=api&utm_medium=Matheus+Mota%3A1409621959011",
+                        "restricted": 0,
+                        "updated_time": "2018-01-06T02:00:04Z",
+                        "primary_genres": {
+                            "music_genre_list": []
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
