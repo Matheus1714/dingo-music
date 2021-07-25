@@ -12,9 +12,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_spinkit: ^4.1.2
   flutter_typeahead: ^3.2.0
+  share: ^2.0.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_sequence_animation: ^3.0.0
 flutter:
   uses-material-design: true
   assets:

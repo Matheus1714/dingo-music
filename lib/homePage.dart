@@ -3,6 +3,8 @@ import 'colorsDefault.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'widgets/widgets.dart';
 import 'models/models.dart';
+import 'animations/animations.dart';
+import 'package:share/share.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -42,9 +44,10 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.all(30),
             child: Column(
               children: [
-                appName(),
+                // appName(),
+                AppNameAnimation(),
                 SizedBox(height: 30),
-                principalIcon(),
+                PrincipalIconAnimation(),
                 SizedBox(height: 30),
                 Container(
                   child: ConstrainedBox(
@@ -59,8 +62,7 @@ class _HomePageState extends State<HomePage> {
                           controller: this._typeAheadControllerArtist),
                       suggestionsCallback: (pattern) async {
                         // Chamada http
-                        return await Track.getSuggestions(
-                            musicName, pattern);
+                        return await Track.getSuggestions(musicName, pattern);
                       },
                       itemBuilder: (context, suggestion) {
                         return ListTile(
@@ -93,8 +95,7 @@ class _HomePageState extends State<HomePage> {
                           controller: this._typeAheadControllerMusic),
                       suggestionsCallback: (pattern) async {
                         // Chamada http
-                        return await Track.getSuggestions(
-                            pattern, artistName);
+                        return await Track.getSuggestions(pattern, artistName);
                       },
                       itemBuilder: (context, suggestion) {
                         return ListTile(
@@ -127,7 +128,8 @@ class _HomePageState extends State<HomePage> {
                         initialState = false;
                         findingMusic = true;
                       });
-                      lyricMusic = await Track.getMusicAPI(musicName, artistName);
+                      lyricMusic =
+                          await Track.getMusicAPI(musicName, artistName);
                       Future.delayed(const Duration(seconds: 1), () {
                         setState(() {
                           findingMusic = false;
@@ -153,6 +155,37 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (lyricMusic != "") {
+            final RenderBox box = context.findRenderObject();
+            final String text = lyricMusic;
+            final String description =
+                "Música de Dingo Music: \n Artista ou Banda: ${artistName}\n Música: ${musicName}\n";
+            Share.share(
+              text,
+              subject: description,
+              sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+            );
+          } else {
+            return showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Letra Vazia'),
+                content: const Text('Pesquise a música antes de compartilhar!'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
+        child: const Icon(Icons.ios_share),
+        backgroundColor: Colors.green,
       ),
     );
   }
