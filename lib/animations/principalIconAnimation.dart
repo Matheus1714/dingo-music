@@ -15,7 +15,6 @@ class _PrincipalIconAnimationState extends State<PrincipalIconAnimation>
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
         duration: const Duration(milliseconds: 900), vsync: this);
     _controller.repeat(reverse: true);
@@ -24,7 +23,8 @@ class _PrincipalIconAnimationState extends State<PrincipalIconAnimation>
   @override
   Widget build(BuildContext context) {
     return ScaleTransition(
-      scale: _tween.animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut)),
+      scale: _tween.animate(
+          CurvedAnimation(parent: _controller, curve: Curves.elasticOut)),
       child: Container(
         decoration: BoxDecoration(
           color: DefaultColors.secondaryVioletColor,
