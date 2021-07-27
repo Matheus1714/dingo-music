@@ -2,7 +2,6 @@
 
 Dingo Music é um projeto de aplicativo web/app de música oferecido para os alunos no projeto [Business Application](https://www.linkedin.com/company/business-applications-ita/mycompany/).
 É um aplicativo de letras de músicas funcional e desenvolvido para ser totalmente gratuito.
-Ao final deve ser possível fazer uma també.
 
 ## Ferramentas
 
