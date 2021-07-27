@@ -5,7 +5,10 @@ import 'lyrics.dart';
 Widget musicComponent(
     initialState, findingMusic, musicName, artistName, lyricMusic) {
   if (initialState) {
-    return Container();
+    return Container(
+      width: 300,
+      child: Text('A letra da sua música será colocada aqui.'),
+    );
   } else {
     if (findingMusic) {
       return loading();

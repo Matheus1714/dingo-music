@@ -40,118 +40,120 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(30),
-            child: Column(
-              children: [
-                // appName(),
-                AppNameAnimation(),
-                SizedBox(height: 30),
-                PrincipalIconAnimation(),
-                SizedBox(height: 30),
-                Container(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 300),
-                    child: TypeAheadField(
-                      textFieldConfiguration: TextFieldConfiguration(
-                          autofocus: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Nome do Artista',
-                          ),
-                          controller: this._typeAheadControllerArtist),
-                      suggestionsCallback: (pattern) async {
-                        // Chamada http
-                        return await Track.getSuggestions(musicName, pattern);
-                      },
-                      itemBuilder: (context, suggestion) {
-                        return ListTile(
-                          title: Text(suggestion["track"]["artist_name"]),
-                        );
-                      },
-                      onSuggestionSelected: (suggestion) {
-                        // Quando alguem clica em um item
-                        setState(() {
-                          artistName =
-                              suggestion["track"]["artist_name"].toString();
-                        });
-                        this._typeAheadControllerArtist.text =
-                            suggestion["track"]["artist_name"];
-                      },
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.all(30),
+              child: Column(
+                children: [
+                  // appName(),
+                  AppNameAnimation(),
+                  SizedBox(height: 30),
+                  PrincipalIconAnimation(),
+                  SizedBox(height: 30),
+                  Container(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: 300),
+                      child: TypeAheadField(
+                        textFieldConfiguration: TextFieldConfiguration(
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Nome do Artista',
+                            ),
+                            controller: this._typeAheadControllerArtist),
+                        suggestionsCallback: (pattern) async {
+                          // Chamada http
+                          return await Track.getSuggestions(musicName, pattern);
+                        },
+                        itemBuilder: (context, suggestion) {
+                          return ListTile(
+                            title: Text(suggestion["track"]["artist_name"]),
+                          );
+                        },
+                        onSuggestionSelected: (suggestion) {
+                          // Quando alguem clica em um item
+                          setState(() {
+                            artistName =
+                                suggestion["track"]["artist_name"].toString();
+                          });
+                          this._typeAheadControllerArtist.text =
+                              suggestion["track"]["artist_name"];
+                        },
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 30),
-                Container(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 300),
-                    child: TypeAheadField(
-                      textFieldConfiguration: TextFieldConfiguration(
-                          autofocus: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Nome da Música',
-                          ),
-                          controller: this._typeAheadControllerMusic),
-                      suggestionsCallback: (pattern) async {
-                        // Chamada http
-                        return await Track.getSuggestions(pattern, artistName);
-                      },
-                      itemBuilder: (context, suggestion) {
-                        return ListTile(
-                          title: Text(suggestion["track"]["track_name"]),
-                        );
-                      },
-                      onSuggestionSelected: (suggestion) {
-                        // Quando alguem clica em um item
-                        setState(() {
-                          musicName =
-                              suggestion["track"]["track_name"].toString();
-                        });
-                        this._typeAheadControllerMusic.text =
-                            suggestion["track"]["track_name"];
-                      },
+                  SizedBox(height: 30),
+                  Container(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: 300),
+                      child: TypeAheadField(
+                        textFieldConfiguration: TextFieldConfiguration(
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Nome da Música',
+                            ),
+                            controller: this._typeAheadControllerMusic),
+                        suggestionsCallback: (pattern) async {
+                          // Chamada http
+                          return await Track.getSuggestions(pattern, artistName);
+                        },
+                        itemBuilder: (context, suggestion) {
+                          return ListTile(
+                            title: Text(suggestion["track"]["track_name"]),
+                          );
+                        },
+                        onSuggestionSelected: (suggestion) {
+                          // Quando alguem clica em um item
+                          setState(() {
+                            musicName =
+                                suggestion["track"]["track_name"].toString();
+                          });
+                          this._typeAheadControllerMusic.text =
+                              suggestion["track"]["track_name"];
+                        },
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 30),
-                Container(
-                  width: 300.0,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: DefaultColors.secondaryVioletColor,
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        textStyle: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                    onPressed: () async {
-                      setState(() {
-                        initialState = false;
-                        findingMusic = true;
-                      });
-                      lyricMusic =
-                          await Track.getMusicAPI(musicName, artistName);
-                      Future.delayed(const Duration(seconds: 1), () {
+                  SizedBox(height: 30),
+                  Container(
+                    width: 300.0,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: DefaultColors.secondaryVioletColor,
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          textStyle: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      onPressed: () async {
                         setState(() {
-                          findingMusic = false;
+                          initialState = false;
+                          findingMusic = true;
                         });
-                      });
-                      setState(() {
-                        artistName = artistName;
-                        musicName = musicName;
-                        lyricMusic = lyricMusic;
-                      });
-                    },
-                    child: Text('Buscar Letra'),
+                        lyricMusic =
+                            await Track.getMusicAPI(musicName, artistName);
+                        Future.delayed(const Duration(seconds: 1), () {
+                          setState(() {
+                            findingMusic = false;
+                          });
+                        });
+                        setState(() {
+                          artistName = artistName;
+                          musicName = musicName;
+                          lyricMusic = lyricMusic;
+                        });
+                      },
+                      child: Text('Buscar Letra'),
+                    ),
                   ),
-                ),
-                SizedBox(height: 30),
-                searchYouTubeButton(artistName, musicName),
-                SizedBox(height: 30),
-                musicComponent(initialState, findingMusic, musicName,
-                    artistName, lyricMusic),
-                SizedBox(height: 30),
-                copyright(),
-              ],
+                  SizedBox(height: 30),
+                  searchYouTubeButton(artistName, musicName),
+                  SizedBox(height: 30),
+                  musicComponent(initialState, findingMusic, musicName,
+                      artistName, lyricMusic),
+                  SizedBox(height: 30),
+                  copyright(),
+                ],
+              ),
             ),
           ),
         ),
